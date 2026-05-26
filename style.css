@@ -1,0 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  color: #fff;
+  overflow: hidden;
+}
+
+#game {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  width: 448px;
+  height: 576px;
+  display: block;
+  box-shadow: 0 0 60px rgba(80, 140, 255, 0.25);
+  background: #000;
+}
