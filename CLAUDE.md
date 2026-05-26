@@ -46,6 +46,24 @@ These two machines run independently — `Game.state` is what the player sees; `
 
 The sounds are *synthesized* approximations of the Namco WSG chip (square waves, 1-bit quantized noise, filter envelopes). They are not extracted arcade ROM samples and we deliberately do not ship those — adding the real ROMs is out of scope. If a tweak is requested, adjust the synth parameters (frequencies, durations, envelope shapes) rather than swapping in audio files.
 
-## Git workflow
+## Git workflow — commit and push as you go
 
-Repo is `github.com/klee3534/galaga`, tracking `origin/main`. After making changes the user accepts, stage only the files touched (not blanket `git add .`), write a clean commit message focused on the "why," and push to `origin`. Group related edits into one logical commit. The user values having a saved remote version at all times, so push promptly after committing.
+**This is a standing user requirement, not optional.** The user values never losing work and being able to revert at any moment. As you complete units of work, commit them locally and push to GitHub. Do this throughout the session, not just at the end.
+
+Repo: `github.com/klee3534/galaga`, tracking `origin/main`.
+
+**When to commit and push**:
+- After every logical unit of work the user accepts — a feature added, a bug fixed, a refactor finished, a doc updated. Don't wait until "everything is done."
+- Multi-step tasks should land as multiple commits, one per logical step, not one giant commit at the end.
+- After updating docs (README, CLAUDE.md), comments, or sounds — these are work too, commit them.
+
+**How**:
+- Stage only the files you actually changed (`git add <files>`, never `git add .` or `-A`).
+- Commit message: concise subject line focused on the *why* (not "update file.js"); optional body for context. Use a HEREDOC for multi-line messages so formatting survives.
+- Include the trailer `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`.
+- `git push` to `origin` immediately after committing — a local commit isn't safe until it's on the remote.
+
+**Hard rules**:
+- Never force-push, never `--amend` a pushed commit, never `--no-verify`. If a hook fails, fix the cause and make a new commit.
+- Never commit secrets (`.env`, credentials). The repo has no `.gitignore` yet — add one before committing any file that could contain sensitive values.
+- If you're unsure whether a change is worth committing, commit it. Many small commits are better than losing work.
